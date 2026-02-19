@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOLAN COSSAIS // PORTFOLIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-base: #050a05;
+            --bg-panel: #080f08;
+            --bg-card: #0a140a;
+            --bg-card-hover: #0d1a0d;
+            --green-primary: #00ff41;
+            --green-dim: #00cc33;
+            --green-faint: #003311;
+            --green-glow: rgba(0, 255, 65, 0.15);
+            --green-border: rgba(0, 255, 65, 0.25);
+            --amber: #ffb800;
+            --amber-dim: rgba(255, 184, 0, 0.7);
+            --red-alert: #ff2222;
+            --text-primary: #c8f0c8;
+            --text-secondary: #6a9e6a;
+            --text-muted: #3a5c3a;
+            --scanline: rgba(0,255,65,0.03);
+            --grid-line: rgba(0,255,65,0.05);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, var(--scanline) 2px, var(--scanline) 4px);
+            pointer-events: none;
+            z-index: 9999;
+            animation: scanMove 8s linear infinite;
+        }
+
+        @keyframes scanMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 40px; }
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nav-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            background: rgba(5, 10, 5, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--green-border);
+            z-index: 1000;
+        }
+
+        .nav-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--green-primary), transparent);
+            animation: scanH 3s ease-in-out infinite;
+        }
+
+        @keyframes scanH {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--green-primary);
+            text-decoration: none;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--green-primary), 0 0 20px rgba(0,255,65,0.5);
+        }
+
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--green-primary);
+            box-shadow: 0 0 6px var(--green-primary);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '> ';
+            color: var(--green-primary);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--green-primary);
+            text-shadow: 0 0 8px var(--green-primary);
+        }
+        .nav-links a:hover::before, .nav-links a.active::before { opacity: 1; }
+
+        main { max-width: 1400px; margin: 0 auto; padding: 0 3rem; position: relative; z-index: 1; }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+            padding: 8rem 0 4rem;
+        }
+
+        .hero-content { flex: 1; }
+
+        .hero-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--green-primary);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 0.2s;
+        }
+        .hero-tag::before { content: '[ '; }
+        .hero-tag::after { content: ' ]'; }
+
+        .hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            text-shadow: 0 0 30px rgba(0,255,65,0.3);
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 0.4s;
+        }
+
+        .hero h1 .green {
+            color: var(--green-primary);
+            text-shadow: 0 0 20px var(--green-primary);
+        }
+
+        .hero-role {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            color: var(--amber-dim);
+            letter-spacing: 2px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 0.6s;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 550px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            border-left: 2px solid var(--green-border);
+            padding-left: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 0.8s;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 1s;
+        }
+
+        .btn-primary, .btn-secondary {
+            font-family: 'Share Tech Mono', monospace;
+            padding: 0.9rem 2rem;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--green-primary);
+            border: 1px solid var(--green-primary);
+            box-shadow: 0 0 15px rgba(0,255,65,0.2), inset 0 0 15px rgba(0,255,65,0.05);
+        }
+        .btn-primary:hover {
+            background: rgba(0,255,65,0.1);
+            box-shadow: 0 0 25px rgba(0,255,65,0.4), inset 0 0 25px rgba(0,255,65,0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--text-muted);
+        }
+        .btn-secondary:hover {
+            color: var(--green-primary);
+            border-color: var(--green-border);
+            transform: translateY(-2px);
+        }
+
+        .hero-hud {
+            width: 380px;
+            flex-shrink: 0;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards 0.6s;
+        }
+
+        .hud-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--green-border);
+            border-radius: 4px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0,255,65,0.08), inset 0 0 40px rgba(0,255,65,0.02);
+        }
+
+        .hud-panel::before {
+            content: 'SYS.PROFILE // OPERATEUR';
+            position: absolute;
+            top: -10px; left: 20px;
+            background: var(--bg-base);
+            padding: 0 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--green-primary);
+            letter-spacing: 3px;
+        }
+
+        .hud-corner { position: absolute; width: 12px; height: 12px; }
+        .hud-corner.tl { top: -1px; left: -1px; border-top: 2px solid var(--green-primary); border-left: 2px solid var(--green-primary); }
+        .hud-corner.tr { top: -1px; right: -1px; border-top: 2px solid var(--green-primary); border-right: 2px solid var(--green-primary); }
+        .hud-corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--green-primary); border-left: 2px solid var(--green-primary); }
+        .hud-corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--green-primary); border-right: 2px solid var(--green-primary); }
+
+        .profile-avatar {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #0d1a0d 0%, #0a140a 100%);
+            border: 1px solid var(--green-border);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            border-radius: 2px;
+        }
+
+        .profile-avatar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,65,0.1), transparent);
+            animation: sweep 4s ease-in-out infinite;
+        }
+
+        @keyframes sweep {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        .hud-data { display: flex; flex-direction: column; gap: 0.8rem; }
+
+        .hud-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0,255,65,0.06);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+        }
+        .hud-row:last-child { border-bottom: none; }
+        .hud-key { color: var(--text-muted); letter-spacing: 1px; }
+        .hud-val { color: var(--green-primary); letter-spacing: 1px; }
+        .hud-val.amber { color: var(--amber); }
+        .hud-val.online { color: var(--green-primary); text-shadow: 0 0 8px var(--green-primary); }
+
+        .clearance-bar {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--green-border);
+        }
+
+        .clearance-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+        }
+
+        .clearance-dots { display: flex; gap: 0.4rem; }
+
+        .dot {
+            width: 20px; height: 8px;
+            border-radius: 1px;
+            background: var(--green-faint);
+            border: 1px solid var(--green-border);
+        }
+        .dot.active {
+            background: var(--green-primary);
+            box-shadow: 0 0 6px var(--green-primary);
+        }
+
+        section {
+            margin-bottom: 8rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        section.visible { opacity: 1; transform: translateY(0); }
+
+        .section-header { margin-bottom: 3rem; }
+
+        .section-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+        .section-tag::before { content: '// '; color: var(--green-primary); }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px; height: 2px;
+            background: var(--green-primary);
+            margin-top: 0.8rem;
+            box-shadow: 0 0 8px var(--green-primary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--green-border);
+            border-radius: 4px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: var(--green-primary);
+            box-shadow: 0 0 10px var(--green-primary);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s ease;
+        }
+        .about-card:hover::before { transform: scaleY(1); }
+        .about-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--green-primary);
+            box-shadow: 0 0 30px rgba(0,255,65,0.08);
+            transform: translateX(4px);
+        }
+
+        .card-num {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .about-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 8px rgba(0,255,65,0.5));
+        }
+
+        .about-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--green-primary);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .about-card p { color: var(--text-secondary); font-size: 1rem; line-height: 1.8; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--green-border);
+            border-radius: 4px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+        }
+        .skill-category:hover {
+            border-color: var(--green-primary);
+            box-shadow: 0 0 20px rgba(0,255,65,0.06);
+        }
+
+        .skill-category h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--amber);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--green-border);
+        }
+
+        .skill-category ul { list-style: none; }
+        .skill-category li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            position: relative;
+            padding-left: 1.5rem;
+            border-bottom: 1px dotted rgba(0,255,65,0.05);
+            transition: color 0.3s;
+        }
+        .skill-category li:last-child { border-bottom: none; }
+        .skill-category li::before { content: '>'; position: absolute; left: 0; color: var(--green-primary); }
+        .skill-category:hover li { color: var(--text-primary); }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--green-border);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(0,255,65,0.03) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .project-card:hover {
+            border-color: var(--green-primary);
+            box-shadow: 0 0 40px rgba(0,255,65,0.1), inset 0 0 40px rgba(0,255,65,0.02);
+            transform: translateY(-4px);
+        }
+
+        .project-header {
+            padding: 1.5rem 1.8rem 1rem;
+            border-bottom: 1px solid var(--green-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .project-id {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+
+        .project-status {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--green-primary);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+        .project-status::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--green-primary);
+            box-shadow: 0 0 4px var(--green-primary);
+        }
+
+        .project-icon-row {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            padding: 0 1.8rem;
+            background: rgba(0,255,65,0.02);
+            border-bottom: 1px solid var(--green-border);
+            gap: 1.5rem;
+        }
+
+        .project-emoji { font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(0,255,65,0.4)); }
+
+        .project-bar-group { flex: 1; }
+        .project-bar {
+            height: 3px;
+            background: var(--green-faint);
+            border-radius: 2px;
+            margin-bottom: 6px;
+            overflow: hidden;
+        }
+        .project-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green-primary), var(--green-dim));
+            box-shadow: 0 0 4px var(--green-primary);
+            border-radius: 2px;
+        }
+
+        .project-content { padding: 1.5rem 1.8rem; }
+        .project-content h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+        .project-content p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.2rem; }
+
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--green-faint);
+            border: 1px solid rgba(0,255,65,0.2);
+            border-radius: 2px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--green-dim);
+            transition: all 0.3s ease;
+        }
+        .project-card:hover .tag { border-color: var(--green-border); color: var(--green-primary); }
+
+        /* ====== ENGAGEMENT ====== */
+        .engagement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Carte engagement : texte à gauche, photo(s) à droite */
+        .engagement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--green-border);
+            border-radius: 4px;
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: stretch;
+            transition: all 0.3s ease;
+        }
+        .engagement-card:hover {
+            border-color: var(--green-primary);
+            box-shadow: 0 0 20px rgba(0,255,65,0.06);
+        }
+
+        .engagement-text {
+            flex: 1;
+            min-width: 0;
+        }
+        .engagement-text h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--amber);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--green-border);
+        }
+        .engagement-text ul { list-style: none; }
+        .engagement-text li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            position: relative;
+            padding-left: 1.5rem;
+            border-bottom: 1px dotted rgba(0,255,65,0.05);
+            transition: color 0.3s;
+        }
+        .engagement-text li:last-child { border-bottom: none; }
+        .engagement-text li::before { content: '>'; position: absolute; left: 0; color: var(--green-primary); }
+        .engagement-card:hover .engagement-text li { color: var(--text-primary); }
+
+        /* Colonne photo(s) à droite */
+        .engagement-photos {
+            width: 220px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .engagement-photos .eng-photo {
+            flex: 1;
+            border: 1px solid var(--green-border);
+            border-radius: 2px;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .engagement-photos .eng-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* CONTACT */
+        .contact-section {
+            border: 1px solid var(--green-border);
+            border-radius: 4px;
+            background: var(--bg-card);
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-section::before {
+            content: 'TRANSMISSION.INITIER';
+            position: absolute;
+            top: -12px; left: 30px;
+            background: var(--bg-base);
+            padding: 0 1rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--green-primary);
+            letter-spacing: 3px;
+        }
+
+        .contact-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-sub {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--amber-dim);
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--green-primary);
+            border: 1px solid var(--green-primary);
+            text-decoration: none;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 0%; height: 100%;
+            background: rgba(0,255,65,0.1);
+            transition: width 0.3s ease;
+        }
+        .contact-btn:hover::before { width: 100%; }
+        .contact-btn:hover { box-shadow: 0 0 25px rgba(0,255,65,0.3); transform: translateY(-2px); }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: var(--bg-base);
+            border: 1px solid var(--green-border);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+        }
+        .contact-item i { color: var(--green-primary); font-size: 0.9rem; width: 14px; }
+        .contact-item a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s; }
+        .contact-item span { color: var(--text-secondary); }
+        .contact-item:hover { border-color: var(--green-primary); box-shadow: 0 0 15px rgba(0,255,65,0.08); }
+        .contact-item:hover a, .contact-item:hover span { color: var(--green-primary); }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--green-border);
+            margin-top: 4rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        footer strong { color: var(--green-primary); font-weight: normal; }
+        footer p + p { margin-top: 0.5rem; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px; height: 1.2em;
+            background: var(--green-primary);
+            vertical-align: middle;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @media (max-width: 968px) {
+            nav { padding: 1rem 1.5rem; }
+            main { padding: 0 1.5rem; }
+            .hero { flex-direction: column; padding: 6rem 0 3rem; gap: 3rem; }
+            .hero-hud { width: 100%; }
+            .hero h1 { font-size: 2.2rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .nav-status { font-size: 0.65rem; }
+            .contact-section { padding: 2.5rem 1.5rem; }
+            .engagement-card { flex-direction: column; }
+            .engagement-photos { width: 100%; flex-direction: row; height: 200px; }
+            .engagement-photos .eng-photo { flex: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-wrapper" id="navbar">
+        <nav>
+            <a href="#" class="logo">NC.EXE</a>
+            <ul class="nav-links">
+                <li><a href="#about" class="active">PROFIL</a></li>
+                <li><a href="#skills">CAPACITÉS</a></li>
+                <li><a href="#projects">OPÉRATIONS</a></li>
+                <li><a href="#engagement">ENGAGEMENT</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+            <div class="nav-status">
+                <div class="status-dot"></div>
+                <span>SYSTÈME EN LIGNE</span>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-tag">Étudiant Ingénieur ESIEA</div>
+                <h1>NOLAN<br><span class="green">COSSAIS</span><span class="cursor"></span></h1>
+                <div class="hero-role">CYBERSÉCURITÉ // ARMÉE // INGÉNIERIE</div>
+                <p class="hero-desc">
+                    Passionné par la cybersécurité et le monde militaire, je développe une expertise technique rigoureuse tout en cultivant un sens aigu du leadership et de l'engagement collectif.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn-primary">VOIR LES OPÉRATIONS</a>
+                    <a href="#contact" class="btn-secondary">ÉTABLIR LE CONTACT</a>
+                </div>
+            </div>
+
+            <div class="hero-hud">
+                <div class="hud-panel">
+                    <div class="hud-corner tl"></div>
+                    <div class="hud-corner tr"></div>
+                    <div class="hud-corner bl"></div>
+                    <div class="hud-corner br"></div>
+                    <div class="profile-avatar" style="height:300px;"><img src="pp.jpg" alt="Nolan Cossais" style="width:100%;height:100%;object-fit:cover;object-position:center 65%;border-radius:2px;"></div>
+                    <div class="hud-data">
+                        <div class="hud-row">
+                            <span class="hud-key">STATUT</span>
+                            <span class="hud-val online">● EN RECHERCHE</span>
+                        </div>
+                        <div class="hud-row">
+                            <span class="hud-key">ÉCOLE</span>
+                            <span class="hud-val">ESIEA</span>
+                        </div>
+                        <div class="hud-row">
+                            <span class="hud-key">SECTEUR</span>
+                            <span class="hud-val amber">ÎLE-DE-FRANCE</span>
+                        </div>
+                        <div class="hud-row">
+                            <span class="hud-key">LANGUE</span>
+                            <span class="hud-val">FR // EN (TOEIC 840)</span>
+                        </div>
+                        <div class="hud-row">
+                            <span class="hud-key">DISPO</span>
+                            <span class="hud-val amber">SEPT. 2026</span>
+                        </div>
+                    </div>
+                    <div class="clearance-bar">
+                        <div class="clearance-label">NIVEAU D'HABILITATION</div>
+                        <div class="clearance-dots">
+                            <div class="dot active"></div>
+                            <div class="dot active"></div>
+                            <div class="dot active"></div>
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="section-header">
+                <div class="section-tag">DOSSIER 001 — PROFIL OPÉRATEUR</div>
+                <h2 class="section-title">CE QUI ME DÉFINIT</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-num">// 01</div>
+                    <div class="icon">🎯</div>
+                    <h3>Management</h3>
+                    <p>Mon implication dans divers projets en équipe m'a permis de développer un fort attrait pour le leadership et l'organisation de projets complexes. La gestion du stress, l'encadrement des tâches et la communication efficace sont des compétences que j'ai pu cultiver au fil de mes expériences.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-num">// 02</div>
+                    <div class="icon">🌱</div>
+                    <h3>L'Échec</h3>
+                    <p>L'échec est un élément essentiel en toute situation. Lorsqu'il est bien pris en compte, il devient une source d'apprentissage et de croissance. J'ai appris à analyser mes erreurs avec objectivité et à en tirer des enseignements concrets qui me permettent de progresser.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-num">// 03</div>
+                    <div class="icon">🔧</div>
+                    <h3>Gain d'Expérience</h3>
+                    <p>Chaque projet est un point d'évolution dans mon parcours. Ma participation active au monde associatif (Président du BDA et responsable évènement du BDE) de l'ESIEA, en parallèle de mes études, m'a permis de développer une solide expérience de gestion et d'organisation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="section-header">
+                <div class="section-tag">DOSSIER 002 — CAPACITÉS TECHNIQUES</div>
+                <h2 class="section-title">COMPÉTENCES</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>⚙️ Électronique</h3>
+                    <ul>
+                        <li>Arduino / STM32 / Raspberry Pi</li>
+                        <li>Architecture microprocesseur</li>
+                        <li>Fritzing</li>
+                        <li>Conception de circuits simples</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>🛡️ Cyber &amp; Armée</h3>
+                    <ul>
+                        <li>TryHackMe</li>
+                        <li>Formation militaire JSPP</li>
+                        <li>Stages à la BSPP</li>
+                        <li>Cisco / Wireshark</li>
+                        <li>Computer Network</li>
+                        <li>Linux</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>💻 Programmation</h3>
+                    <ul>
+                        <li>Python</li>
+                        <li>Langage C</li>
+                        <li>Java (POO)</li>
+                        <li>Assembleur ARM</li>
+                        <li>SQL</li>
+                        <li>Bash &amp; Scripts</li>
+                        <li>OCaml</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>🛠️ Outils &amp; Méthodes</h3>
+                    <ul>
+                        <li>Git / GitHub</li>
+                        <li>Agile / SMART</li>
+                        <li>Microsoft 365</li>
+                        <li>MySQL / ORACLE</li>
+                        <li>Eclipse / VsCode</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-header">
+                <div class="section-tag">DOSSIER 003 — JOURNAL DES OPÉRATIONS</div>
+                <h2 class="section-title">PROJETS</h2>
+            </div>
+            <div class="projects-grid">
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-id">OPS-001 // ROBOTIQUE</div>
+                        <div class="project-status">COMPLÉTÉ</div>
+                    </div>
+                    <div class="project-icon-row">
+                        <div class="project-emoji">🤖</div>
+                        <div class="project-bar-group">
+                            <div class="project-bar"><div class="project-bar-fill" style="width:90%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:75%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:60%"></div></div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Challenge Jeux Olympiques ESIEA 🏆</h3>
+                        <p>Conception d'un robot autonome avec 3 défis : précision (tir de balles via QR Code), force (traction sur distance maximale) et coordination (danse synchronisée entre robots).</p>
+                        <div class="project-tags">
+                            <span class="tag">LANGAGE C</span>
+                            <span class="tag">ROBOTIQUE</span>
+                            <span class="tag">CRÉATIVITÉ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-id">OPS-002 // ALGO</div>
+                        <div class="project-status">COMPLÉTÉ</div>
+                    </div>
+                    <div class="project-icon-row">
+                        <div class="project-emoji">🌩️</div>
+                        <div class="project-bar-group">
+                            <div class="project-bar"><div class="project-bar-fill" style="width:80%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:85%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:70%"></div></div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Tempête Solaire</h3>
+                        <p>Représentation graphique et gestion dynamique de l'envoi de ressources vers différentes stations endommagées. Utilisation des graphes pour modéliser les connexions et optimiser les flux.</p>
+                        <div class="project-tags">
+                            <span class="tag">C / JAVA</span>
+                            <span class="tag">GRAPHES</span>
+                            <span class="tag">RAYLIB</span>
+                            <span class="tag">DIJKSTRA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-id">OPS-003 // FORENSICS</div>
+                        <div class="project-status">COMPLÉTÉ</div>
+                    </div>
+                    <div class="project-icon-row">
+                        <div class="project-emoji">🔍</div>
+                        <div class="project-bar-group">
+                            <div class="project-bar"><div class="project-bar-fill" style="width:95%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:80%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:65%"></div></div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Data Recovery — Projet PST</h3>
+                        <p>Récupération de données bas-niveau par comparaison des métadonnées avec les partitions. Identification des fichiers supprimés et restauration vers un serveur sécurisé.</p>
+                        <div class="project-tags">
+                            <span class="tag">SERVEUR</span>
+                            <span class="tag">C / JAVA</span>
+                            <span class="tag">ROOT LAYER</span>
+                            <span class="tag">META DATA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-id">OPS-004 // SIMULATION</div>
+                        <div class="project-status">COMPLÉTÉ</div>
+                    </div>
+                    <div class="project-icon-row">
+                        <div class="project-emoji">🅿️</div>
+                        <div class="project-bar-group">
+                            <div class="project-bar"><div class="project-bar-fill" style="width:88%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:92%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:78%"></div></div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Simulateur de Parking Intelligent</h3>
+                        <p>Simulation avec routage automatique et interface graphique temps réel sous Raylib. Animations de déplacement, statistiques d'occupation basées sur l'algorithme de Dijkstra.</p>
+                        <div class="project-tags">
+                            <span class="tag">LANGAGE C</span>
+                            <span class="tag">DIJKSTRA</span>
+                            <span class="tag">RAYLIB</span>
+                            <span class="tag">GRAPHES</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-id">OPS-005 // API</div>
+                        <div class="project-status">COMPLÉTÉ</div>
+                    </div>
+                    <div class="project-icon-row">
+                        <div class="project-emoji">🏗️</div>
+                        <div class="project-bar-group">
+                            <div class="project-bar"><div class="project-bar-fill" style="width:82%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:76%"></div></div>
+                            <div class="project-bar"><div class="project-bar-fill" style="width:88%"></div></div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Zone Industrialo-Portuaire</h3>
+                        <p>Serveur externe fournissant des actions et requêtes pour simuler une zone portuaire complexe. Modélisation des interactions entre véhicules et infrastructures avec menu dynamique.</p>
+                        <div class="project-tags">
+                            <span class="tag">JAVA</span>
+                            <span class="tag">API</span>
+                            <span class="tag">SERVEUR</span>
+                            <span class="tag">MENU DYNAMIQUE</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="engagement">
+            <div class="section-header">
+                <div class="section-tag">DOSSIER 004 — TERRAIN &amp; ENGAGEMENT</div>
+                <h2 class="section-title">MON ENGAGEMENT</h2>
+            </div>
+
+            <div class="engagement-list">
+
+                <!-- CARTE 1 : Pompier — 1 photo -->
+                <div class="engagement-card">
+                    <div class="engagement-text">
+                        <h3>🚒 Brigade de Sapeurs-Pompiers de Paris 🗼</h3>
+                        <ul>
+                            <li>Formation de 3 ans sur le métier de pompier de Paris. Formation militaire avec une spécialisation sur le secours à victime.</li>
+                            <li>Une formation humaine remplie d'expériences et de valeurs fortes. De l'encadrement d'évènements sportifs à l'intervention en civil sur des personnes en détresse, ces 3 années ont été riches en enseignements.</li>
+                            <li>Une formation très fournie en diplômes et en compétences techniques.</li>
+                            <li>Mon comportement exemplaire m'a permis d'être désigné pour devenir porte drapeau de la Légion d'Honneur. J'officie encore aujourd'hui pour les cérémonies et rendez vous des comités du Val de Marne.</li>
+                        </ul>
+                    </div>
+                    <div class="engagement-photos">
+                        <div class="eng-photo">
+                            <img src="pompier.jpg" alt="Brigade de Sapeurs-Pompiers de Paris">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE 2 : Associations — 2 photos empilées -->
+                <div class="engagement-card">
+                    <div class="engagement-text">
+                        <h3>👔 Associations de l'ESIEA 🏛️</h3>
+                        <ul>
+                            <li>Président du Bureau des Arts : Seul, j'ai relancé l'association d'un projet musical. J'ai su attirer de nouveaux membres avec la création d'un atelier musique qui nous a mené à jouer aux Folies Bergères ainsi qu'au Grand Rex (Paris). Aujourd'hui le BDA est l'une des associations les plus actives du campus de Paris. Après deux mandats de présidences, le bilan est simple : 3 nouveaux pôles artistiques construits (cuisine, arts manuels, lecture), le bureau compte plus de membres actifs qu'aucune autre association de l'ESIEA et notre présence est quasi hebdomadaire sur le campus.</li>
+                            <li>Responsable événement du BDE : J'ai encadré pendant 2 ans la réalisation de chaque événement du BDE. Trouver les partenaires, démarcher des contrats, trouver des lieux et des ressources, gérer les budgets, la logistique, le management et la communication — tout cela dans le but d'animer la vie étudiante. Cette mission a été menée avec succès, avec des évènements variés et de qualité allant du week-end d'intégration au gala de fin d'année, en passant par des conférences et des tournois sportifs.</li>
+                        </ul>
+                    </div>
+                    <div class="engagement-photos">
+                        <div class="eng-photo">
+                            <img src="batterie.jpeg" alt="Concert batterie">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="contact-section">
+                <div class="hud-corner tl"></div>
+                <div class="hud-corner tr"></div>
+                <div class="hud-corner bl"></div>
+                <div class="hud-corner br"></div>
+                <h2 class="contact-title">ENVIE DE TRAVAILLER ENSEMBLE ?</h2>
+                <p class="contact-sub">&gt; RECHERCHE ALTERNANCE — SEPTEMBRE 2026_</p>
+                <a href="mailto:cossais@et.esiea.fr" class="contact-btn">INITIER LA TRANSMISSION</a>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:cossais@et.esiea.fr">cossais@et.esiea.fr</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://www.linkedin.com/in/nolan-cossais-121563305/" target="_blank">LinkedIn</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+33 7 81 53 03 73</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Île-de-France</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>NOLAN COSSAIS</strong> — ÉTUDIANT INGÉNIEUR ESIEA</p>
+        <p>PRÉSIDENT BDA // RESPONSABLE EVENT BDE // BATTEUR 14 ANS 🥁</p>
+        <p style="margin-top:0.5rem;opacity:0.5;">© 2026 — BILINGUE : FRANÇAIS // ANGLAIS (TOEIC 840)</p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            document.querySelectorAll('section[id]').forEach(section => {
+                if (pageYOffset >= section.offsetTop - 200) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('section').forEach(s => observer.observe(s));
+
+        const logo = document.querySelector('.logo');
+        logo.addEventListener('mouseenter', () => {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%';
+            const original = logo.textContent;
+            let iterations = 0;
+            const interval = setInterval(() => {
+                logo.textContent = original.split('').map((char, i) => {
+                    if (i < iterations) return original[i];
+                    return chars[Math.floor(Math.random() * chars.length)];
+                }).join('');
+                if (iterations >= original.length) clearInterval(interval);
+                iterations += 1/3;
+            }, 30);
+        });
+    </script>
+</body>
+</html>
